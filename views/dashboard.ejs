@@ -1,17 +1,20 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
 </head>
 
 <body>
-  <h3>Hello <%= user.username %></h3>
+
+  <%- include("partials/navbar") %>
+
+  <h3>Hello <%= session.user.username %></h3>
   <p>Welcome to your dashboard</p>
   <p>Here is the information we have on file for you:</p>
-  <h4>username: <%= user.username %></h4>
-  <h4>email: <%= user.email %></h4>
-  <a href="/logout">Logout</a>
+  <h4>username: <%= session.user.username %></h4>
+  <h4>email: <%= session.user.email %></h4>
 </body>
 
 </html>

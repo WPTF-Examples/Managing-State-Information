@@ -42,6 +42,13 @@ app.use(clientSessions({
 
 app.use(express.urlencoded({ extended: false }));
 
+// add the session to app.locals
+
+app.use((req,res,next)=>{
+  app.locals.session = req.session;
+  next();
+});
+
 // Setup a route on the 'root' of the url to redirect to /login
 
 app.get("/", (req, res) => {
@@ -95,13 +102,11 @@ app.get("/logout", (req, res) => {
 // that renders the dashboard page
 
 app.get("/dashboard", ensureLogin, (req, res) => {
-  res.render("dashboard", {
-    user: req.session.user
-  });
+  res.render("dashboard")
 });
 
 app.use((req, res, next) => {
-  res.status(404).send("Page Not Found");
+  res.status(404).render("404");
 });
 
 app.listen(HTTP_PORT, ()=>{
